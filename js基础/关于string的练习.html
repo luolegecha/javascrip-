@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var str="hellojavascript123456aaa444123";
+			var test="abcde";
+			         012345678901234567890123456789
+		//1.字符串的子串位置判断	
+			//indexOf方法:返回的是从头开始寻找子串第一次出现的位置，从0位开始数，空值和没找到均返回-1
+			//第二个参数是指定从哪一位开始找
+			console.log(str.indexOf("123"));
+			console.log(str.indexOf());
+			console.log(str.indexOf("123",16));
+			
+			
+			//lastIndexOf方法：返回的是从尾部开始寻找子串第一次出现的位置
+			console.log(str.lastIndexOf("123"));
+			console.log(str.lastIndexOf());
+			
+			//search方法同两种方法一样但是可以添加正则表达式进行判断
+			console.log(str.search("123"));
+			console.log(str.search(/123/));
+			
+		//2.字符串提取	
+			//slice方法双参数（start，end）注意end是不包括的，即返回start到end-1位的子字符串，可以为负数，-1是最后一位，不填返回原串
+			//注意生成的子串是新串与原来的串无关
+			console.log(str.slice(0));
+			console.log(str.slice(-1));
+			console.log(str.slice());
+			console.log(str.slice(0,5));
+			//substring 同slice相似，但是不能用负数，负数输出的是原串
+			console.log(str.substring(0));
+			console.log(str.substring(-1));
+			console.log(str.substring());
+			console.log(str.substring(0,5));
+			//substr其中的参数是（start，length）
+			console.log(str.substr(0));
+			console.log(str.substr(-1));
+			console.log(str.substr());
+			console.log(str.substr(0,5));
+		//3.字符串替换	
+			//replace方法参数（想要替换的串，修改后的值）可以使用正则表达式，如下就是将所有123替换为321，若没有/g则替换从左到右第一个匹配的子串
+			//注意与原串无关，返回的是一个新的串
+			console.log(str.replace(/123/g,"321"));
+		//4.大小写转换
+			//与原串无关，返回新串
+			console.log(str.toLowerCase());
+			console.log(str.toUpperCase());
+		//5.字符串连接
+			//可以使用直接拼接，也可以使用concat方法，可以放置多个参数，依次拼接下去
+			console.log(str+test);
+			console.log(str.concat(" ",test,test,test));
+		//6.去除空格	
+			console.log(str.trim());
+		//7.字符串转数组
+			//split方法参数为间隔符，创造数组时，间隔符的字符不算入其中，空值返回数组长度为1的数组，整个原串是一个元素
+			//“”值返回每个单体字符为一个元素的数组，长度等于字符串长度
+			console.log(str.split());
+			console.log(str.split(""));
+			console.log(str.length==str.split("").length);//结果返回true
+			console.log(str.split("1"));
+			console.log(str+test);
+			console.log(str+test);
+		</script>
+	</body>
+	
+</html>
