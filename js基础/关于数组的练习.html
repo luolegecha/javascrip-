@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//数组里可以放任何数据类型
+			var obj={
+				name:"jack",
+				age:12
+			}
+			var arr=["123",124,"sa",obj,{obj1:123},null,NaN,""]
+			console.log(arr);
+	//数组方法
+		//1.toString（）放回以“，”为间隔符的字符串，其中对象返回[object Object]
+		//null返回“”，NaN返回NaN
+			console.log(arr.toString());
+		//2.join（）返回以参数字符为间隔的字符串，不传参则和toString一样
+			console.log(arr.join("*"));
+			console.log(arr.join());
+		//3.pop方法删除最后一个元素，原数组会改变，返回这个被删除的数组
+			console.log(arr.pop());
+			console.log(arr.pop());
+		//4.push方法在末尾加入一个新的元素，原数组会改变，返回的是新数组的长度
+			console.log(arr.push("147"));
+			console.log(arr.push(778));
+			console.log(arr.push(obj));
+			
+		//5.shift是删除第一个元素，并返回该值
+		//6.unshift在开头增加一个元素并返回新数组长度
+			console.log(arr.shift());
+			console.log(arr.unshift("first"));
+		//7.拼接数组	
+			//slice 方法有三个参数start表示插入的位置，length表示此位置开始删除多少位元素，第三个参数为想要新加入的数组元素
+			//注意返回的是删除元素组成的数组
+			console.log(arr.splice(4,1,"charu"));
+			console.log(arr.splice(4,1));//没有第三个数组可实现单纯的删除特定的几个元素
+			console.log(arr.splice(4,1,"插入1","插入2"));
+			//concat在尾部加入新的元素，放回的是新的数组不在原数组上直接加工，而是复制一个新数组再进行加工
+			console.log(arr.concat("houbu1","houbu2"));
+		//8.裁剪数组slice(start,end)返回start到end-1的新数据，原数据保持不变，只有start则一直截取到最后
+		//start可以为负数
+			console.log(arr.slice(2));
+			console.log(arr.slice(2,6));
+			console.log(arr.slice(-3));
+		//9.数组排序和反转
+			//sort函数并不能判断数字的大小，而是根据首个数字大小进行排列（这会使得21>100,因为2大于1），因此对于a-z这样的字符排序很友好，对数字排序不适用
+			//ps：sort使用的是插入和快排结合的排序算法，在长度小于10时采用插入排序，大于时使用快排
+			var num=[45,33,56,49,123,0,11,2];
+			console.log(num.sort());
+			console.log(num.sort(function(a,b){return a-b;}));//return b-a则为降序排序
+			console.log(num.reverse());//反转数组
+		//10.数组的迭代
+			//map()中为一个function，表示对所有值进行函数处理，返回的是新数组，不改变原数组
+			//这个function有特定的传入参数value，index，array,
+			console.log(num.map(fun1));
+			function fun1(value,index,num){
+				if(index>2)
+				return value=value+2;
+				else return value;
+			}
+			//filter函数中也为一个function，用于对所有值进行该函数的判断从而达到过滤的目的，返回的是新数组不改变原数组
+			console.log(num.filter(fun2));
+			function fun2(value,index,num){
+				return value<40;
+			}
+			console.log(num.filter(fun1));//使用处理类的函数无法做到像map一样改变值的大小而是返回原数组
+			//reduce同map类似但是它的function中多了一个total，类似于累加器,且reduce可以加一个参数，返回该参数与total相加的值
+			//从右向左则使用reduceRight函数
+			console.log(num.reduce(fun3,100));
+			function fun3(total,value,index,num){
+				return total+value;
+			}
+			//every（），some（），使用的函数和filter相类似，用于判断数组元素是否满足条件，返回true和false
+			//every是全真为真，一假则假，some是一真为真，全假为假
+			console.log(num.every(fun2));
+			console.log(num.some(fun2));
+			//同string一样数组也可以使用indexOf和lastIndexOf这两个函数
+			console.log(num.indexOf(11));
+			console.log(num.lastIndexOf(49));
+			//find和findIndex中的函数同filter的函数类似，用于检测通过标准的第一个元素，并返回，findIndex是返回其下标
+			console.log(num.find(fun2));
+			console.log(num.findIndex(fun2));
+		</script>
+	</body>
+</html>

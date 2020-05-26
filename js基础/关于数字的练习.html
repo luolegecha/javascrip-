@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+	//数字
+		var num=12345678;
+		//非数值NaN返回的是number类型
+		console.log(isNaN(NaN));
+		console.log(typeof(NaN));
+		
+		//Infinity表示正无穷大，对应添加减号表示负无穷大，但不显示具体数值，而是直接显示该英文，返回类型是number
+		console.log(typeof(Infinity));
+		console.log(-Infinity);
+		
+		var x=0xff;//十六进制写法
+		var y=37;
+		console.log(x);
+		console.log(y.toString(16));//转换进制
+		console.log(y.toString(8));
+		console.log(y.toString(2));
+		
+		
+	//数字方法	
+		//1.toString（）转换为字符串，其中添加数字还能转换为不同进制的字符串
+		
+		//2.toExponential(n) 带n位小数的科学计数法，且最后一位带四舍五入
+		//什么都不加则返回整数一位，其余全是小数的数
+		console.log(num.toExponential(4));
+		console.log(num.toExponential());
+		
+		//3.toFixed（n）带n位小数的数，且有四舍五入功能
+		var k=152.66848
+		console.log(num.toFixed(2));
+		console.log(k.toFixed(2));
+		
+		//number(),parseInt(),parseFloat()可以将其他类型转换为数字类型
+		var s="145";
+		//Number为内置对象
+		console.log(Number.MAX_VALUE);//大约为1.8e+308
+		console.log(Number.MIN_VALUE);//5e-324
+		console.log(Number.NEGATIVE_INFINITY);//负无穷大返回的是-Infinity，而非明确数字
+		console.log(Number.POSITIVE_INFINITY);
+		//es6中新增的特殊属性
+		console.log(Number.	EPSILON);//最小误差约为2.2e-16
+		console.log(Number.MAX_SAFE_INTEGER);//2^53-1
+		console.log(Number.MIN_SAFE_INTEGER);//-(2^53-1)
+		console.log(Number(s));
+	</script>
+</body>
+</html>
