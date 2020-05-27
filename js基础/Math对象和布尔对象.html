@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+	//Math对象
+	    //1.属性
+		console.log(Math);//在浏览器控制台能看到所有的属性和方法
+		console.log(Math.E);//e
+		console.log(Math.LN10);//e为底的10的对数
+		console.log(Math.LN2);
+		console.log(Math.PI);//π
+		console.log(Math.SQRT1_2);//根号二分之一
+		console.log(Math.SQRT2);//根号二
+		//2.方法
+		//四舍五入round方法只会四舍五入到整数，特定的位数则应该使用toFixed（）
+		console.log(Math.round(4.6));
+		console.log(Math.round(4.459));
+		console.log(Math.round(-4.23));
+		//指数函数pow(x,y)=x的y次方，在es6中新增了x**y也可以表示次方。
+		console.log(Math.pow(4,3)==4**3);//结果返回true
+		console.log(Math.pow(-4,3));
+		console.log(Math.pow(4,-3));
+		console.log(Math.pow(-4,-3));
+		//平方sprt只能输入非负数，负数会返回NaN
+		console.log(Math.sqrt(2));
+		console.log(Math.sqrt(-2));
+		console.log(Math.sqrt(0));
+		//绝对值abs
+		console.log(Math.abs(-2));
+		//上舍正数和下舍正数
+		console.log(Math.ceil(2.2));//返回3
+		console.log(Math.floor(2.2));//返回2
+		console.log(Math.ceil(-2.2));//返回-2
+		console.log(Math.floor(-2.2));//返回-3
+		//随机数
+		console.log(Math.random());//返回【0,1）之间的随机数
+	//布尔对象
+		var n=new Boolean();
+		var date=new Date();
+		//typeof无法检测出数组，对象和日期这些类型，因为三者均返回object
+		//因此可以使用对象的变量constuctor来判断
+		console.log(n.constructor);
+		console.log(date.constructor);
+		//全局函数Boolean（），在输入空值“”，undefined，null，false，NaN等值时返回false
+		console.log(Boolean(""));//false
+		console.log(Boolean());//false
+		console.log(Boolean(null));//false
+		console.log(Boolean(-1));//true
+		console.log(Boolean(0));//false
+		console.log(Boolean(1));//true
+		console.log(Boolean());
+		</script>
+	</body>
+</html>

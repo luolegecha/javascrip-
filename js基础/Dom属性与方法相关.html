@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="inner">
+				123
+				<p>front</p>
+				<p>after</p>
+			</div>
+			
+		</div>		
+		<script type="text/javascript">
+	//DOM（document object model）
+		console.log(document);//输出的是当前页面的代码，包括<!DOCTYPE html>
+		//1.dom常用属性
+		console.log(document.body);//返回body标签内所有元素
+		console.log(document.documentElement);//返回html标签内所有元素
+		console.log(document.cookie);//返回cookie
+		console.log(document.domain);//返回域名，127.0.0.1
+		
+		//----------------------------------------------------------------------------------------------------------------------//
+		//2.dom结点与结点列表
+		//Dom树：以document结点为根结点，其余标签为后代结点的树形结构，各个标签之间存在有父子，兄弟等一系列关系
+		//获取标签的结点列表
+		var div=document.getElementById("app");//通过id名获取
+		var inner=document.getElementsByClassName("inner");//通过class名获取所有拥有该类名的标签的集合
+		var p=document.getElementsByTagName("p");//通过标签名获取所有该标签的集合
+		var p1=document.querySelector("p");//通过标签名获取
+		var inner1=document.querySelector(".inner");//通过class名获取，使用#app可以获取id名为app的标签
+		var p2=document.querySelectorAll("p");//通过标签名获取所有该标签的集合
+		//区分：getElementById和querySelector都只返回找到的标签本身（单个的），querySelector找的结点是从document结点往下最先出现的符合条件的结点
+		//而其余的方法返回的是结点的集合（即使只有一个结点）
+		//需要通过访问数组元素的方式访问其中的内容，虽然如此，但是这些集合不能算是数组类型的数据，而是html collection和nodelist这两类
+		//只不过直接理解成数组即可
+		console.log(div);
+		console.log(inner);
+		console.log(inner[0]);//取集合中第一个元素结点
+		console.log(p);
+		console.log(p1);
+		console.log(inner1);
+		console.log(p2);
+		console.log(p2[1]);
+		//----------------------------------------------------------------------------------------------------------------------//
+		//结点之间的关系
+		//每一个结点都可以存在父结点，子结点，兄弟结点，祖先结点等等一系列关系，
+		//2.1寻找父结点
+		console.log(document.parentNode);//但是很遗憾，document结点是个孤儿，此处返回的是null
+		console.log(p2[0].parentNode);//返回class是inner的div标签
+		console.log(p2.parentNode);//需要注意不能直接用集合去寻找父结点，会返回undefined
+		//2.2寻找子结点
+		//childNodes和children两者的区别需要分清
+		//由于childNodes会连带text结点也一起返回，所以之后要返回子结点最好使用children，实际使用中text结点的意义并不大
+		console.log(inner[0].childNodes[1]);//返回<p>front</p>
+		console.log(inner[0].childNodes);//返回所有子结点的集合：[text, p, text, p, text]
+		console.log(inner[0].children[0]);//返回<p>front</p>
+		console.log(inner[0].children);//返回所有子标签的集合：[ p,  p ]，
+		console.log(inner[0].lastChild);//注意返回的是结点childNodes[4]
+		console.log(inner[0].firstChild);//注意返回的是结点childNodes[0]
+		
+		//2.3寻找兄弟结点(注意是结点而非标签，也就是说包括text结点)
+		console.log(p1.nextSibling);
+		console.log(p2[1].previousSibling);
+		
+		
+		
+		</script>
+	</body>
+</html>
