@@ -5,13 +5,56 @@
 		<title></title>
 	</head>
 	<body>
-		<div class="inner1">
-			<div class="inner1"></div>
+		<div class="out1">
+			123
+			<div class="inner1">
+				112233
+			</div>
 		</div>
-		<div class="inner2">
-			<div class="inner2"></div>
+		<div class="out2">
+			111
+			<div class="inner2">222</div>
 		</div>
-		<script type="text/javascript">
-		</script>
 	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			
+	//DOM事件流的概念
+	/**
+	 * 三个阶段：事件捕获阶段，事件目标阶段，事件冒泡阶段
+	 * 由于标签元素都是互相嵌套存在父子关系的，当对一块区域做处理的时候（比如点击，鼠标移动到该区域上时）
+	 * 是先执行父级的事件操作还是子级的操作呢？
+	 * 事件捕获阶段：动作是先被父级捕获，再依次往内部传递
+	 * 事件冒泡阶段：动作先被子级捕获，再依次往外传递
+	 */
+		var out1=document.querySelector(".out1");
+		var out2=document.querySelector(".out2");
+		var inner1=document.querySelector(".inner1");
+		var inner2=document.querySelector(".inner2");
+		out1.addEventListener("click",function(){
+			console.log("out1");
+		});
+		inner1.addEventListener('click',function(){
+			//event.stopPropagation();有的时候我们不需要冒泡的操作，而只需要执行子元素的事件，
+			//因此需要取消掉冒泡操作，stopPropagation()可以取消掉当前事件往父级的冒泡。添加该语句后点击inner1只输出inner1.
+			console.log("inner1");
+		});
+		out2.addEventListener('click',function(){
+			console.log("out2");
+		},true);
+		inner2.addEventListener('click',function(){
+			
+			console.log("inner2");
+		},true);
+		/*addEventListener有三个参数第一个是事件名，第二个是执行的函数，第三个是useCapture（是否执行事件捕获)
+		*false为执行事件冒泡，默认是false
+		* 在此处点击inner1，打印inner1，out1 （向上冒泡）          点击out1打印out1
+		* 点击inner2 打印out2，inner2   （先被父级捕获再往里执行）              点击out2打印out2
+		* event.preventDefault();取消默认事件，默认事件指的是标签自带某种动作，比如a标签的跳转，input里submit的提交表单等
+		* 添加该语句后将阻止以上的跳转和提交
+		*/
+	   //Event对象
+	   //Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。
+		}
+		</script>
 </html>
