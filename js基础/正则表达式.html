@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" /><button type="button">屏蔽</button>
+		<div></div>
+		<script type="text/javascript">
+		//创建的方式：通过对象方式创建，也可以直接创建
+		var reg=new RegExp(/123/);
+		var reg2=/abc/;//注意是没有双引号的，与string不同
+		console.log(reg);
+		console.log(reg2);
+		//正则表达式检测字符串是否符合规定，常用于检测邮箱手机号码是否符合规范，使用的方法是test（）返回true和false
+		//1.  /abc/  意思为是否存在abc，abc三者缺一不可且连续
+		console.log(/abc/.test("aabc"));
+		console.log(/abc/.test("aab"));
+		console.log(/abc/.test("abcabc"));
+		//2. /^abc/  意思为是否是以abc为开头
+		console.log(/^abc/.test("aabc"));
+		console.log(/^abc/.test("abccccc"));
+		console.log(/^abc/.test("bc"));
+		console.log(/^abc/.test("aaaabc"));
+		//3. /abc$/  意思为是否是以abc为结尾
+		console.log(/abc$/.test("aabc"));
+		console.log(/abc$/.test("abccccc"));
+		console.log(/abc$/.test("bc"));
+		console.log(/abc$/.test("aaaabc"));
+		//4. /^abc$/ 字符串是否就是abc（精确匹配）
+		console.log(/^abc$/.test("abc"));
+		console.log(/^abc$/.test("abccccc"));
+		console.log(/^abc$/.test("bc"));
+		console.log(/^abc$/.test("aaaabc"));
+		//5. /[abc]/  包含a或b或c ,其中可以加|来分割 【a|b|c】，类似于逻辑或
+		console.log(/[a|bd|c]/.test("bd"));
+		console.log(/[abdc]/.test("x"));
+		console.log(/[abc]/.test("a"));
+		//6. /[a-z]/和/[A-Z]/  表示包含任意的字母，（区分大小写）  /[0-9]/则为任意数字
+		//当然由于字母和数字验证频率很大，所以js中有内定的特殊写法
+		// 使用\d表示0-9的数字，\D表示非数字，\w表示任意字母（大小写均可），下划线和数字，\W表示\w的取反，\s表示是否有空格，\S表示非空格
+		console.log(/[a-z]/.test("g"));
+		console.log(/[A-Z]/.test("D"));
+		console.log(/[0-9]/.test("456223"));
+		console.log(/\d/.test("456223"));
+		console.log(/\D/.test("asdaxxca"));
+		console.log(/\w/.test("-_123asc"));
+		console.log(/\s/.test(" "));
+		//7. /a*/  表示a出现了n次，n可以为0
+		console.log(/[abc|]*/.test(" "));
+		console.log(/abc*/.test(" "));//注意与49行的区别，这里检测的是，ab+n*c(n>=0)这一类型的字符串而不是abc*n类型的字符串
+		console.log(/(abc)*/.test("ab"));//加上括号可以使得abc变成一个整体判断
+		//8. /a+/  表示a出现了至少一次
+		console.log(/a+/.test("b"));
+		console.log(/[abc|]+/.test("abc"));
+		console.log(/[abc|]+/.test("abcacdabc"));
+		//9. /a?/  表示a出现0或者1次
+		console.log(/^a?$/.test("a"));
+		console.log(/colou?r/.test("colouur"));
+		console.log(/abc?3/.test("abcc3"));
+		//10. /a{n}/ 特定次数的a，n>=0
+		console.log(/abc{3}/.test("a|abccc|ccc"));
+		console.log(/abc{0}/.test("ab"));
+		//11.  /a{n,}/  n次及以上的a       /a{n,m}/ n到m次的a
+		console.log(/a{5,}/.test("aaaa"));
+		console.log(/^a{5,8}$/.test("aaaaaaaaaaaa"));
+		//12.  在/规则/之后加入g表示全局匹配，i表示不区分大小写，这在屏蔽功能里常用到
+		//比如要把input里的所有nmd转换成***
+		var but=document.querySelector("button");
+		var div=document.querySelector("div");
+		var input=document.querySelector("input");
+		but.addEventListener('click',function(){
+			var text=input.value.replace(/nmd/gi,"***");
+			div.innerHTML=text;
+		})
+		//13.常用的功能：邮箱校验，手机校验
+		//邮箱：/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+		//解析：@前的部分由字母数字和下划线中划线组成，且至少要出现一次，@之后到“.”之前也类似，“.”之后也类似
+		//手机：/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
+		//解析：前三位是有要求的，后八位只要数字即可
+		</script>
+	</body>
+</html>

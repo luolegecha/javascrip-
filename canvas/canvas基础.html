@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>
+		
+	</title>
+</head>
+<body>
+	<!--canvas是html5新标签，最好使用行内样式定义宽高，因为在其他css样式中定义只是定义元素的宽高并不能改变画布的大小-->
+	<canvas width="1000px" height="1000px" style="border: 1px solid #bbb;"></canvas>
+	<script type="text/javascript">
+		var canvas=document.querySelector("canvas");
+		//获取上下文
+		var ctx=canvas.getContext("2d");
+	//1.绘制普通线条
+		//一个完整的线条绘制，应该被包含在beginpath和stroke之间
+		//beginPath意思为设置新的路径，如果不设置，在后续的绘制中，会使得后项样式覆盖前项样式
+		ctx.beginPath();
+		//移动到该点
+		ctx.moveTo(100,100);
+		//连接到该点
+		ctx.lineTo(200,200);
+		//线条颜色
+		ctx.strokeStyle='#39c5bb';
+		//线条宽度
+		ctx.lineWidth=5;
+		//描边
+		ctx.stroke();
+	//2.绘制三角形
+		ctx.beginPath();
+		ctx.moveTo(300,100);
+		ctx.lineTo(400,100);
+		ctx.lineTo(400,200);
+		//在这时如果直接使用lineto到原点（300,100），确实可以绘制出三角形，但是一旦线条很粗的话会使得衔接处有缺口
+		//解决方案：使用closePath让结尾点自动连接开始点
+		ctx.closePath();
+		ctx.strokeStyle='#39c5bb';
+		ctx.fillStyle='#39c5bb';//fill也可以设置填充的颜色
+		ctx.lineWidth=5;
+		//fill方法可以描绘填充,默认是黑色
+		ctx.fill();
+	//3.绘制正方形，镂空版
+		//外顺时针
+		ctx.moveTo(500,100);
+		ctx.lineTo(600,100);
+		ctx.lineTo(600,200);
+		ctx.lineTo(500,200);
+		ctx.closePath();
+		
+		//内逆时针
+		ctx.moveTo(520,120);
+		ctx.lineTo(520,180);
+		ctx.lineTo(580,180);
+		ctx.lineTo(580,120);
+		
+		//注意如果内正方形也是顺时针的话，则没有镂空的效果，fill的填充效果遵循非零环绕规则
+		ctx.closePath();
+		ctx.fill();
+	//4.线条的样式
+		//4.1 lineCap
+		ctx.beginPath();
+		ctx.moveTo(700,100);
+		ctx.lineTo(800,100);
+		ctx.strokeStyle='#39c5bb';
+		ctx.lineWidth=10;
+		ctx.lineCap='round'; //默认是butt，还有square,意思是线条的两端样式
+		//round是圆顶线段，square虽然同butt没有区别都是方顶，但是square在原有长度上还增加了一点，注意round也是增长并非直接变化成圆角。
+		ctx.stroke();
+		//4.2 lineJoin
+		ctx.beginPath();
+		ctx.moveTo(700,150);
+		ctx.lineTo(800,150);
+		ctx.lineTo(800,180);
+		ctx.strokeStyle='#39c5bb';
+		ctx.lineWidth=10;
+		ctx.lineJoin='miter';//默认miter（尖角样式），表示两条线段的连接处的样式，round是圆角，bevel是平角（就是截去了一个三角形） 
+		ctx.stroke();
+		//4.2 setLineDash()
+		ctx.beginPath();
+		ctx.moveTo(700,200);
+		ctx.lineTo(800,200);
+		ctx.strokeStyle='#39c5bb';
+		ctx.setLineDash([5,10,8]);//参数是一个数组，用于设置虚线，如果数组只有一个数则以此为间隔，如果有两个数及以上则表示【实，空白，实，空白...】
+		//依次往下，若没到重点则循环该数组规则
+		ctx.lineWidth=5;
+		ctx.stroke();
+	//5.渐变线条
+		//核心思想：微分原则，线是由点构成的，每个点设置成不同颜色即可完成渐变样式
+		for(let i=0;i<256;i++){
+			ctx.beginPath();
+			ctx.moveTo(100+i-1,300);
+			ctx.lineTo(100+i,300);
+			ctx.strokeStyle='rgb('+i+','+0+','+i+')';
+			ctx.stroke();
+		}
+	</script>
+</body>
+</html>

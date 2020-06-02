@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas width="1000px" height="1000px" style="border: 1px solid #bbb;"></canvas>
+		<script type="text/javascript">
+			var canvas=document.querySelector("canvas");
+			var ctx=canvas.getContext("2d");
+			
+			//使用API绘制矩形
+			ctx.rect(100,100,400,200);//rect的参数依次为起始点的x，y，矩形的宽和高
+			ctx.fillStyle="#39c5bb";
+			ctx.fill();
+			
+			//当然，还有更简单的方法,这两个方法都不需要beginPath方法来重新定义路径，因为他们本身就是独立路径
+			//且不需要fill和stroke方法来进行绘制，它们会自动绘制好所需图像；
+			ctx.fillRect(300,300,100,100);
+			ctx.strokeRect(400,400,100,100);
+			
+			//清除API
+			ctx.clearRect(0,0,200,200);//参数顺序和rect一样，清除该区域内画布canvas里的所有内容
+			
+			
+			//使用API绘制渐变矩形
+			//createLinearGradient线性渐变，参数为四个，起始点的xy和结束点的xy
+			var linear=ctx.createLinearGradient(100,500,900,600);
+			//渐变的颜色定义使用addcolorstop，参数为两个，第一个0-1之间定义渐变位置，第二个为渐变的颜色
+			linear.addColorStop(0,'#39c5bb');
+			linear.addColorStop(1,'white');
+			ctx.fillStyle=linear;
+			ctx.fillRect(100,500,800,100);
+			
+			//createRadialGradient圆状渐变/放射渐变，参数为六个，起始点的xy和圆的半径r，结束点的xy和圆的半径
+			var radial=ctx.createRadialGradient(200,700,10,200,700,200);
+			radial.addColorStop(0,'#39c5bb');
+			radial.addColorStop(1,'white');
+			ctx.fillStyle=radial;
+			ctx.fillRect(100,600,500,100);
+			
+			//绘制圆形
+			ctx.beginPath();
+			//arc有六个参数，分别是圆心的xy，半径r，起始弧度，结束弧度，逆时针绘制还是顺时针绘制（默认是false顺时针）
+			//1弧度=2π/360=π/180，以三点钟方向为0，六点钟方向为π/2，九点钟方向为π，十二点钟方向为1.5π
+			//则一个完整的圆的参数应该是ctx.arc(100,900,50,0,2*Math.PI,false);注意整个圆的时候顺时针和逆时针都可以
+			ctx.arc(100,900,50,0,Math.PI,false);
+			ctx.fillStyle="#39c5bb";
+			ctx.fill();
+		</script>
+	</body>
+</html>

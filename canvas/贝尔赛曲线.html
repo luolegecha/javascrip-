@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas width="1000px" height="1000px" style="border: 1px solid #bbb;"></canvas>
+		<script type="text/javascript">
+			var canvas=document.querySelector("canvas");
+			var ctx=canvas.getContext("2d");
+			
+			
+			//二次贝尔赛曲线函数quadraticCurveTo，只需要一个控制点xy和结束点xy总共四个参数
+			//贝尔赛曲线的原理，假设要在AB两点间画曲线，控制点为C
+			//连接AC，BC，在两条线段上各取一点，AC上的点是D，BC上的点是E，保证AD/DC=CE/EB
+			//然后再在DE上取一点P也保持以上的比例即DP/PE=AD/DC=CE/EB
+			//根据微分的思想，由于有无数个D,E，那么也有无数个p点，无数个p点组合就是一条曲线
+			ctx.moveTo(100,100);
+			ctx.quadraticCurveTo(100,400,200,100);
+			ctx.stroke();
+			
+			//三次贝塞尔的控制点有两个因此参数有六个，原理与二次贝塞尔曲线类似
+			ctx.beginPath();
+			ctx.moveTo(300,100);
+			ctx.bezierCurveTo(300,400,500,400,700,200);
+			ctx.stroke();
+		</script>
+	</body>
+</html>
