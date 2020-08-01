@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//get
+			//1.获取xmlhttprequest对象,ActiveXObject是对ie5和ie6的兼容
+			var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			//2.设置请求的类型，url，以及是否异步处理
+			ajax.open('GET',"Bom相关.html",true);
+			//3.设置相应的函数
+			ajax.onreadystatechange=function(){
+				//请求成功
+				if(ajax.readyState==4&&ajax.status==200){
+					alert(ajax.responseText);
+				}
+				else{
+					alert("请求失败");
+				}
+			}
+			//4.发送请求到服务器
+			ajax.send();
+			
+			
+			
+			//post请求其实差不多，只是需要设置请求头，并在send中加入发送的数据
+			//设置请求头
+			//ajax.setRequestHeader("content-type", "application/x-www-form-urlencoded")
+			//ajax.send("username=jack")
+		</script>
+	</body>
+</html>
